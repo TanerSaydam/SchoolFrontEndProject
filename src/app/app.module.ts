@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +38,8 @@ import { StudentsReportcardComponent } from './Components/students/students-repo
 import { AdminLoginComponent } from './Components/admin/admin-login/admin-login.component';
 import { StudentsLoginComponent } from './Components/students/students-login/students-login.component';
 import { TeachersLoginComponent } from './Components/teachers/teachers-login/teachers-login.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +79,14 @@ import { TeachersLoginComponent } from './Components/teachers/teachers-login/tea
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    SweetAlert2Module.forRoot(),
+    ToastrModule.forRoot({
+      closeButton:true,
+      progressBar:true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
