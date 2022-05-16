@@ -1,0 +1,111 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Öğretmen Ekleme Sayfası</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/admin">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a routerLink="/admin/teachers">Öğretmenler</a></li>
+            <li class="breadcrumb-item active">Öğretmen Ekleme Sayfası</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-md-4">
+        <img [src]="img.imgUrl" width="500" height="500" alt="">
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Öğretmen Ekleme Sayfası</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <form #addForm="ngForm">
+            <div class="card-body">
+
+              <div class="form-group">
+                <label>Öğretmen Adı Soyadı</label>
+                <input
+                type="text"
+                required
+                class="form-control"
+                name="name"
+                ngModel>
+              </div>
+              <div class="form-group">
+                <label>T.C. Numarası</label>
+                <input
+                type="text"
+                minlength="11"
+                maxlength="11"
+                required
+                class="form-control"
+                name="identityNumber"
+                ngModel>
+              </div>
+              <div class="form-group">
+                <label>Adres</label>
+                <input
+                type="text"
+                required
+                class="form-control"
+                name="address"
+                ngModel>
+              </div>
+              <div class="form-group">
+                <label>Cinsiyet</label>
+                <select class="form-control" ngModel name="gender">
+                  <option>Lütfen seçin yapın...</option>
+                  <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Resim</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" (change)="changeImage($event)" class="custom-file-input">
+                    <label class="custom-file-label" *ngIf="img.imgName != ''">{{img.imgName}} <strong>boyut: {{
+                        img.imgSize }} kb</strong></label>
+                    <label class="custom-file-label" *ngIf="img.imgName == ''">Dosya seç</label>
+                  </div>
+                  <button type="button" class="btn btn-danger mx-2" (click)="clearImg()">Resmi Temzile</button>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button (click)="addTeacher(addForm)" class="btn btn-primary btn-lg btn-block">
+                <i class="fa-solid fa-user-plus"></i>
+                Kaydet
+              </button>
+            </div>
+          </form>
+          <!-- /.card-footer-->
+        </div>
+      </div>
+    </div>
+    <!-- Default box -->
+
+    <!-- /.card -->
+
+  </section>
+  <!-- /.content -->
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TeacherModel } from './model/teacherModel';
+import { TeacherService } from './service/teacher.service';
 
 @Component({
   selector: 'app-admin-teachers',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminTeachersComponent implements OnInit {
 
-  constructor() { }
+  teachers:TeacherModel [] = []
+  filterText="";
+
+  constructor(
+    private teacherService:TeacherService
+  ) { }
 
   ngOnInit(): void {
+    this.getList();
+  }
+
+  getList(){
+    this.teachers = this.teacherService.teachers;
   }
 
 }

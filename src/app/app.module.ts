@@ -39,6 +39,10 @@ import { AdminLoginComponent } from './components/admin/admin-login/admin-login.
 import { StudentsLoginComponent } from './components/students/students-login/students-login.component';
 import { TeachersLoginComponent } from './components/teachers/teachers-login/teachers-login.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AdminTeacherAddComponent } from './components/admin/admin-teachers/admin-teacher-add/admin-teacher-add.component';
+import { FormsModule } from '@angular/forms';
+import { TeacherPipe } from './components/admin/admin-teachers/pipes/teacher.pipe';
+
 
 
 @NgModule({
@@ -75,11 +79,14 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     StudentsReportcardComponent,
     AdminLoginComponent,
     StudentsLoginComponent,
-    TeachersLoginComponent
+    TeachersLoginComponent,
+    AdminTeacherAddComponent,
+    TeacherPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     SweetAlert2Module.forRoot(),
