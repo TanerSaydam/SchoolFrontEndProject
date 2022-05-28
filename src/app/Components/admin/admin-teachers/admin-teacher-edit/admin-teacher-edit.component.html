@@ -37,7 +37,7 @@
               </button>
             </div>
           </div>
-          <form #updateForm="ngForm">
+          <form>
             <div class="card-body">
 
               <div class="form-group">
@@ -46,8 +46,8 @@
                 type="text"
                 required
                 class="form-control"
-                name="name"
                 [(ngModel)] = "teacher.name"
+                [ngModelOptions]="{standalone: true}"
                 >
               </div>
               <div class="form-group">
@@ -57,9 +57,9 @@
                 minlength="11"
                 maxlength="11"
                 required
-                name="identityNumber"
                 class="form-control"
                 [(ngModel)] = "teacher.identityNumber"
+                [ngModelOptions]="{standalone: true}"
                 >
               </div>
               <div class="form-group">
@@ -67,9 +67,9 @@
                 <input
                 type="text"
                 required
-                name="address"
                 class="form-control"
                 [(ngModel)] = "teacher.address"
+                [ngModelOptions]="{standalone: true}"
                 >
               </div>
               <div class="form-group">
@@ -77,8 +77,8 @@
                <select
                   class="form-control"
                   [value]="teacher.gender"
-                  name="gender"
                   [(ngModel)] = "teacher.gender"
+                  [ngModelOptions]="{standalone: true}"
                    >
                   <option>Lütfen seçin yapın...</option>
                   <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>

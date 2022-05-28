@@ -113,7 +113,7 @@ export class AdminTeacherEditComponent implements OnInit {
     formData.append("identityNumber",this.teacher.identityNumber);
     formData.append("address",this.teacher.address);
     formData.append("gender",this.teacher.gender);
-    if (!this.img.imgUrl.indexOf(this.teacher.imageUrl)) {
+    if (this.imgFile != undefined) {
       formData.append("image",this.imgFile,this.img.imgName);
     }
 
