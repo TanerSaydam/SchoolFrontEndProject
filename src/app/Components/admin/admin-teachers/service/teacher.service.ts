@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { TeacherModel } from '../model/teacherModel';
 
 @Injectable({
@@ -8,10 +9,28 @@ export class TeacherService {
 
   teachers: TeacherModel[] = [];
 
-  constructor() { }
+  constructor(
+    @Inject("apiUrl") private apiUrl:string,
+    private httpClient: HttpClient
+  ) { }
 
-  addTeacher(teacherModel:TeacherModel, formData:any){
-    this.teachers.push(teacherModel)
-    console.log(this.teachers);
+  addTeacher(teacherModel:any){
+    let api = this.apiUrl + "Teachers/add";
+    return  this.httpClient.post(api,teacherModel);
+  }
+
+  updateTeacher(teacherModel:any){
+    let api = this.apiUrl + "Teachers/update";
+    return this.httpClient.post(api,teacherModel);
+  }
+
+  getById(id:number){
+    let api = this.apiUrl + "Teachers/getById?id=" + id;
+    return this.httpClient.get(api);
+  }
+
+  getList(){
+    let api = this.apiUrl + "Teachers/getlist";
+    return this.httpClient.get(api);
   }
 }

@@ -1,6 +1,7 @@
 import { AfterContentChecked, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorService } from 'src/app/services/error.service';
 import { TeacherModel } from '../model/teacherModel';
 import { TeacherService } from '../service/teacher.service';
 
@@ -25,11 +26,14 @@ export class AdminTeacherAddComponent implements OnInit{
     imgUrl: "/assets/img/noimage.jpg"
   };
 
+  imgFile: any ;
+
   @ViewChild("addForm") addForm:NgForm;
 
   constructor(
     private teacherService:TeacherService,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private errorService:ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -42,26 +46,24 @@ export class AdminTeacherAddComponent implements OnInit{
     }
 
     let formData = new FormData;
-    //formData.append("img",this.img.imgUrl,this.img.imgName);
+    formData.append("name",addForm.value.name);
+    formData.append("identityNumber",addForm.value.identityNumber);
+    formData.append("address",addForm.value.address);
+    formData.append("gender",addForm.value.gender);
+    formData.append("image",this.imgFile,this.img.imgName);
 
-    let teacherModel = new TeacherModel();
-    teacherModel.name = addForm.value.name;
-    teacherModel.address = addForm.value.address;
-    teacherModel.identityNumber = addForm.value.identityNumber;
-    teacherModel.firstEntry = true;
-    teacherModel.gender = addForm.value.gender;
-    teacherModel.imageUrl = this.img.imgUrl;
-    teacherModel.isActive = true;
-
-    this.teacherService.addTeacher(teacherModel,formData);
-    this.toastrService.success("Öğretmen kaydı başarıyla oluşturuldu","Başarılı");
-    this.addForm.reset();
-    this.clearImg();
+    this.teacherService.addTeacher(formData).subscribe((res)=>{
+      this.toastrService.success("Öğretmen kaydı başarıyla oluşturuldu","Başarılı");
+      this.addForm.reset();
+      this.clearImg();
+    },(err)=>{
+      this.errorService.errorHandler(err);
+    });
   }
 
   changeImage(event:any){
     if(event.target.files && event.target.files[0]){
-
+      this.imgFile = event.target.files[0];
      this.img.imgName = event.target.files[0].name;
      this.img.imgSize = +event.target.files[0].size * 0.001;
      //console.log(event.target.files[0])

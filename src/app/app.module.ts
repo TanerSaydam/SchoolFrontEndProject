@@ -40,8 +40,11 @@ import { StudentsLoginComponent } from './components/students/students-login/stu
 import { TeachersLoginComponent } from './components/teachers/teachers-login/teachers-login.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminTeacherAddComponent } from './components/admin/admin-teachers/admin-teacher-add/admin-teacher-add.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeacherPipe } from './components/admin/admin-teachers/pipes/teacher.pipe';
+import { HttpClientModule } from '@angular/common/http'
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminTeacherEditComponent } from './components/admin/admin-teachers/admin-teacher-edit/admin-teacher-edit.component';
 
 
 
@@ -81,21 +84,27 @@ import { TeacherPipe } from './components/admin/admin-teachers/pipes/teacher.pip
     StudentsLoginComponent,
     TeachersLoginComponent,
     AdminTeacherAddComponent,
-    TeacherPipe
+    TeacherPipe,
+    AdminTeacherEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    HttpClientModule,
+    NgxPaginationModule,
     SweetAlert2Module.forRoot(),
     ToastrModule.forRoot({
       closeButton:true,
       progressBar:true
     })
   ],
-  providers: [],
+  providers: [
+    {provide: 'apiUrl', useValue: 'https://localhost:7040/api/'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

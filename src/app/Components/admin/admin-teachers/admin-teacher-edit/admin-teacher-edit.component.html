@@ -4,13 +4,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Öğretmen Ekleme Sayfası</h1>
+          <h1>Öğretmen Güncelleme Sayfası</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a routerLink="/admin">Ana Sayfa</a></li>
             <li class="breadcrumb-item"><a routerLink="/admin/teachers">Öğretmenler</a></li>
-            <li class="breadcrumb-item active">Öğretmen Ekleme Sayfası</li>
+            <li class="breadcrumb-item active">Öğretmen Güncelleme Sayfası</li>
           </ol>
         </div>
       </div>
@@ -21,12 +21,12 @@
   <section class="content">
     <div class="row">
       <div class="col-md-4">
-        <img [src]="img.imgUrl" style="max-width: 100%; max-height: 100%" alt="">
+        <img [src]="img.imgUrl" width="500" height="500" alt="">
       </div>
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Öğretmen Ekleme Sayfası</h3>
+            <h3 class="card-title">Öğretmen Güncelleme Sayfası</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -37,7 +37,7 @@
               </button>
             </div>
           </div>
-          <form #addForm="ngForm">
+          <form #updateForm="ngForm">
             <div class="card-body">
 
               <div class="form-group">
@@ -47,7 +47,8 @@
                 required
                 class="form-control"
                 name="name"
-                ngModel>
+                [(ngModel)] = "teacher.name"
+                >
               </div>
               <div class="form-group">
                 <label>T.C. Numarası</label>
@@ -56,22 +57,29 @@
                 minlength="11"
                 maxlength="11"
                 required
-                class="form-control"
                 name="identityNumber"
-                ngModel>
+                class="form-control"
+                [(ngModel)] = "teacher.identityNumber"
+                >
               </div>
               <div class="form-group">
                 <label>Adres</label>
                 <input
                 type="text"
                 required
-                class="form-control"
                 name="address"
-                ngModel>
+                class="form-control"
+                [(ngModel)] = "teacher.address"
+                >
               </div>
               <div class="form-group">
                 <label>Cinsiyet</label>
-                <select class="form-control" ngModel name="gender">
+               <select
+                  class="form-control"
+                  [value]="teacher.gender"
+                  name="gender"
+                  [(ngModel)] = "teacher.gender"
+                   >
                   <option>Lütfen seçin yapın...</option>
                   <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
                 </select>
@@ -92,9 +100,9 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <button (click)="addTeacher(addForm)" class="btn btn-primary btn-lg btn-block">
-                <i class="fa-solid fa-user-plus"></i>
-                Kaydet
+              <button (click)="updateTeacher()" class="btn btn-warning btn-lg btn-block">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Güncelle
               </button>
             </div>
           </form>

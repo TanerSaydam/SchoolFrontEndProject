@@ -10,4 +10,5 @@ export class TeacherModel
   passwordHash:string;
   passwordSalt:string;
   firstEntry:boolean;
+  image:any;
 }
